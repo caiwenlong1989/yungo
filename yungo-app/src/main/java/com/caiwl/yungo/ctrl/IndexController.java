@@ -11,7 +11,7 @@ public class IndexController {
     @Autowired
     private IndexMapper indexMapper;
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "/index"})
     public String index() {
         return indexMapper.getMsg();
     }

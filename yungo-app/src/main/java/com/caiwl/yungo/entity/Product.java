@@ -7,13 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "t_customer")
+@Table(name = "t_product")
 @Data
-public class Customer {
+public class Product {
     @Id
     @GeneratedValue(generator = "JDBC")
     private Long id;
     private Date createTime;
     private Date updateTime;
-    private String phone;
+    private Integer count;
+    private Integer buyCount;
+    private Integer noBuyCount;
 }

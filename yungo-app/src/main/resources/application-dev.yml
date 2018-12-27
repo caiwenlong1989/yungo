@@ -13,3 +13,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+my:
+  chuanglan:
+    account:
+    password:
