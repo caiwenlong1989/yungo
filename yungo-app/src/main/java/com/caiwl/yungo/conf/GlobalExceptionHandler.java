@@ -1,4 +1,4 @@
-package com.caiwl.yungo.config;
+package com.caiwl.yungo.conf;
 
 import com.caiwl.yungo.bean.Body;
 import lombok.extern.slf4j.Slf4j;

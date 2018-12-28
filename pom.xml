@@ -11,6 +11,7 @@
     <modules>
         <module>yungo-app</module>
         <module>yungo-admin</module>
+        <module>yungo-common</module>
     </modules>
 
     <parent>
