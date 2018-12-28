@@ -6,8 +6,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("com.caiwl.yungo.mapper")
-public class YungoApplication {
+public class YungoAdminApplication {
     public static void main(String[] args) {
-        SpringApplication.run(YungoApplication.class, args);
+        SpringApplication.run(YungoAdminApplication.class, args);
     }
 }

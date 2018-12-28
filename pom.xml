@@ -10,6 +10,7 @@
 
     <modules>
         <module>yungo-app</module>
+        <module>yungo-admin</module>
     </modules>
 
     <parent>

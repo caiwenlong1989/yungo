@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>yungo-app</artifactId>
+    <artifactId>yungo-admin</artifactId>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -48,7 +48,7 @@
                     <programs>
                         <program>
                             <id>${project.artifactId}</id>
-                            <mainClass>com.caiwl.yungo.YungoAppApplication</mainClass>
+                            <mainClass>com.caiwl.yungo.YungoAdminApplication</mainClass>
                         </program>
                     </programs>
                 </configuration>
