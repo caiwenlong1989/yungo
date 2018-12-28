@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/app/v1")
+@RequestMapping("/admin/v1")
 public class IndexController {
     @Autowired
     private IndexMapper indexMapper;
