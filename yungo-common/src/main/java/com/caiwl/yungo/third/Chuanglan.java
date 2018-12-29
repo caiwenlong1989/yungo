@@ -28,6 +28,7 @@ public class Chuanglan {
             json.put("password", password);
             json.put("msg", content);
             json.put("phone", phone);
+            // 需要状态报告
             json.put("report", true);
             json.put("uid", UUID.randomUUID().toString());
             String body = HttpClientUtil.post(URL, json.toString());

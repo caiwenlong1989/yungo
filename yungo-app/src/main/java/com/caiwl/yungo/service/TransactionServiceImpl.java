@@ -14,7 +14,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private BuyLogMapper buyLogMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = ArithmeticException.class)
     @Override
     public boolean buyProduct(String phone, long productId, int from, int count) {
         int rows = productMapper.updateNoBuyCount(productId, from, count);

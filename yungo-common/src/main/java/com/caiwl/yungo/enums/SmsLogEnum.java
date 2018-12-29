@@ -2,6 +2,7 @@ package com.caiwl.yungo.enums;
 
 public class SmsLogEnum {
     public enum Type {
+        /** 注册 */
         REGISTER(1),
         ;
 
@@ -16,6 +17,7 @@ public class SmsLogEnum {
     }
 
     public enum RespCode {
+        /** 提交成功 */
         SUBMIT_SUCCESS(0),
         ;
 
