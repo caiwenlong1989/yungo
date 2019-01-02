@@ -19,13 +19,13 @@ public class PublicController {
     @Autowired
     private SmsLogService smsLogService;
 
-    @GetMapping("/smsCode/register")
-    public Body registerSmsCode(@RequestParam String phone) {
+    @GetMapping("/smsCode/registry")
+    public Body registrySmsCode(@RequestParam String phone) {
         if (customerService.exists(phone)) {
             return Body.fail("该手机号码已注册，可以直接登录哦");
         }
         String content = String.format("您的验证码是：%s", StringUtil.randomNum(6));
-        Body body = smsLogService.sendSmsCode(SmsLogEnum.Type.REGISTER.getType(), phone, content);
+        Body body = smsLogService.sendSmsCode(SmsLogEnum.Type.REGISTRY.getType(), phone, content);
         if (body.getCode() == SmsLogEnum.RespCode.SUBMIT_SUCCESS.getCode()) {
             return Body.success();
         }

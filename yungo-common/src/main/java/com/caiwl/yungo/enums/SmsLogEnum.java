@@ -3,7 +3,7 @@ package com.caiwl.yungo.enums;
 public class SmsLogEnum {
     public enum Type {
         /** 注册 */
-        REGISTER(1),
+        REGISTRY(1),
         ;
 
         private int type;

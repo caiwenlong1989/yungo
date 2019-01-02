@@ -17,3 +17,5 @@ my:
   chuanglan:
     account:
     password:
+  sms-code:
+    ip-count-limit: 20

@@ -17,7 +17,6 @@ public class SmsLog {
     private Long id;
     private Date createTime;
     private Date updateTime;
-    // 1-register
     private Integer type;
     private String phone;
     private String content;
