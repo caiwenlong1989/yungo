@@ -17,7 +17,6 @@ import java.util.concurrent.ScheduledFuture;
 public class DynamicTask {
     @Autowired
     private ThreadPoolTaskScheduler scheduler;
-
     private ScheduledFuture<?> future;
 
     @Bean
@@ -29,7 +28,7 @@ public class DynamicTask {
 
     @GetMapping("/start")
     public Body start() {
-        future = scheduler.schedule(new MyRunnable(), new CronTrigger("0/1 * * * * *"));
+        future = scheduler.scheduleWithFixedDelay(new MyRunnable(), 1000L);
         return Body.success();
     }
 
@@ -44,7 +43,7 @@ public class DynamicTask {
     @GetMapping("/change")
     public Body change() {
         stop();
-        future = scheduler.schedule(new MyRunnable(), new CronTrigger("0/3 * * * * *"));
+        future = scheduler.scheduleWithFixedDelay(new MyRunnable(), 1000L);
         return Body.success();
     }
 }
