@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLDecoder;
 
+/**
+ * 创蓝短信状态报告通知（建议非及时性回调，通知和业务处理分离，通知时仅存储参数，避免并发；然后定时处理业务）
+ */
 @RestController
 @RequestMapping("/api/v1/callback/chuanglan")
 @Slf4j

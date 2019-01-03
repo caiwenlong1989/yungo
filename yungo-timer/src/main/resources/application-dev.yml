@@ -1,0 +1,21 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yungo?characterEncoding=utf8
+    username: root
+    password: mysql
+    type: com.zaxxer.hikari.HikariDataSource
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+my:
+  chuanglan:
+    account:
+    password:
+  sms-code:
+    ip-count-limit: 20

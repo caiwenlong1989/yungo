@@ -12,6 +12,7 @@
         <module>yungo-app</module>
         <module>yungo-admin</module>
         <module>yungo-common</module>
+        <module>yungo-timer</module>
     </modules>
 
     <parent>
