@@ -2,6 +2,7 @@ package com.caiwl.yungo.service;
 
 import com.caiwl.yungo.bean.Body;
 import com.caiwl.yungo.third.Chuanglan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,13 @@ public class SmsLogServiceImpl implements SmsLogService {
     @Value("${my.chuanglan.password}")
     private String password;
 
+    @Autowired
+    private AsyncService asyncService;
+
     @Override
     public Body sendSmsCode(int type, String phone, String content) {
-        return Chuanglan.sendJson(account, password, phone, content);
+        Body body = Chuanglan.sendJson(account, password, phone, content);
+        asyncService.saveSmsLog(type, phone, content, body);
+        return body;
     }
 }

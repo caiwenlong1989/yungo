@@ -11,6 +11,7 @@ public class Body {
     private Object data;
 
     public static Body success() {
+        System.out.println("Body");
         return Body.builder().code(0).msg("success").build();
     }
 

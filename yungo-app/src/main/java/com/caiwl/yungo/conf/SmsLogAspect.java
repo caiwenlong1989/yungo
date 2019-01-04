@@ -8,15 +8,17 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 public class SmsLogAspect {
     @Autowired
     private SmsLogMapper smsLogMapper;
 
+    @Async
     @AfterReturning(value = "within(com.caiwl.yungo.service.SmsLogServiceImpl)", returning = "body")
     public void afterReturning(JoinPoint joinPoint, Body body) {
         Object[] args = joinPoint.getArgs();
