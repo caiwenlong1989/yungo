@@ -55,8 +55,8 @@ public class DynamicTask {
 
     private void doStart(TaskCode taskCode) {
         TaskConfig taskConfig = taskConfigMapper.get(taskCode.name());
-        String className = "com.caiwl.yungo.runnable." + taskConfig.getClazz();
-        Runnable task = null;
+        String className = "com.caiwl.yungo.task." + taskConfig.getClazz();
+        Runnable task;
         try {
             task = (Runnable) Class.forName(className).newInstance();
         } catch (Exception e) {

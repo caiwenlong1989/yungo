@@ -1,11 +1,11 @@
-package com.caiwl.yungo.runnable;
+package com.caiwl.yungo.task;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-public class MyRunnable implements Runnable {
+public class MyTask implements Runnable {
     AtomicInteger idx = new AtomicInteger(0);
 
     @Override
