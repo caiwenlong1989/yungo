@@ -8,7 +8,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * 从请求头中获取用户ID，然后作为方法参数传递
+ * 从请求Attr中获取客户ID，然后作为方法参数传递
  */
 public class CustomerIdMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Override

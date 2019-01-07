@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 //@Aspect
 //@Component
 @Slf4j
+@Deprecated
 public class SmsLogAspect {
     @Autowired
     private SmsLogMapper smsLogMapper;

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 从请求头中解析出客户ID，作为拦截参数，并写入Attr备用
  * @author caiwl
  * @date 2019/1/7 10:20
  */
@@ -21,8 +22,13 @@ public class CustomerIdInterceptor extends HandlerInterceptorAdapter {
             log.error("Authorization is null or ''");
             return false;
         }
+        // Authorization=Basic P43A...
         String hashId = Authorization.substring(6);
         long customerId = HashIdUtil.decode(hashId);
+        if (customerId == 0) {
+            log.error("Authorization HashID={} error", hashId);
+            return false;
+        }
         log.info("Authorization HashID={}, customerId={}", hashId, customerId);
         request.setAttribute(Constants.ATTR_CUSTOMER_ID, customerId);
         return true;
