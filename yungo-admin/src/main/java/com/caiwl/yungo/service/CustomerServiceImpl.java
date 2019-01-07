@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
 
     @Override
-    public Body list(String phone, int pageNum, int pageSize) {
+    public Body page(String phone, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Customer> list = customerMapper.list(phone);
         return Body.success(new PageInfo<>(list));

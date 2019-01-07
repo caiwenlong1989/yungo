@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Body otherError(Exception e) {
-        log.error("Exception, msg={}", e.getMessage());
+        log.error("Exception occurred：", e);
         return Body.fail("服务器忙，请稍后重试");
     }
 }

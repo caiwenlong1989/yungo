@@ -9,6 +9,10 @@ public class StringUtil extends StringUtils {
     private static final Random random = new Random();
     private static final Pattern PATTERN_MOBILE = Pattern.compile("^1[3456789]\\d{9}$");
 
+    public static boolean isEmpty(String str) {
+        return (str == null || str.isEmpty());
+    }
+
     public static String randomNum(int len) {
         return String.valueOf(random.nextDouble()).substring(2, 2 + len);
     }

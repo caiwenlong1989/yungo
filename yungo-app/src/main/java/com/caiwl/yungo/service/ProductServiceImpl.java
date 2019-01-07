@@ -3,6 +3,7 @@ package com.caiwl.yungo.service;
 import com.caiwl.yungo.bean.Body;
 import com.caiwl.yungo.entity.Product;
 import com.caiwl.yungo.mapper.ProductMapper;
+import com.caiwl.yungo.service.base.TransactionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

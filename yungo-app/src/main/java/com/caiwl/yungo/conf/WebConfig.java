@@ -15,9 +15,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return new SmsCodeInterceptor();
     }
 
+    @Bean
+    public CustomerIdInterceptor getCustomerIdInterceptor() {
+        return new CustomerIdInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getSmsCodeInterceptor()).addPathPatterns("/app/v1/pub/smsCode/*");
+        registry.addInterceptor(getSmsCodeInterceptor())
+                .addPathPatterns("/app/v1/pub/smsCode/*");
+        registry.addInterceptor(getCustomerIdInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/app/v1/pub/smsCode/*");
     }
 
     @Override

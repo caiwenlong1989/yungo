@@ -1,4 +1,4 @@
-package com.caiwl.yungo.service;
+package com.caiwl.yungo.service.base;
 
 import com.caiwl.yungo.entity.BuyLog;
 import com.caiwl.yungo.mapper.BuyLogMapper;

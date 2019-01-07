@@ -1,6 +1,8 @@
 package com.caiwl.yungo.mapper;
 
 import com.caiwl.yungo.entity.Customer;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
@@ -17,4 +19,7 @@ public interface CustomerMapper extends Mapper<Customer> {
         }
         return false;
     }
+
+    @Select("select * from t_customer where id = #{id}")
+    Customer get(@Param("id") long id);
 }
