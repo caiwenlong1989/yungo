@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IndexMapper {
-
     @Select("select msg from t_index")
     String getMsg();
 }

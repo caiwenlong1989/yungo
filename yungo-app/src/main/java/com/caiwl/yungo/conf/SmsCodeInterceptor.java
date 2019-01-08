@@ -1,5 +1,6 @@
 package com.caiwl.yungo.conf;
 
+import com.caiwl.yungo.util.DateUtil;
 import com.caiwl.yungo.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,18 @@ public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = getIpAddress(request);
-        String key = RedisService.KEY_PREFIX_SMS_CODE_IP_COUNT + ip;
+        String key = RedisService.KEY_PREFIX_SMS_CODE_IP_COUNT + DateUtil.today() + "_" + ip;
         String ipCountStr = redisService.get(key);
         if (ipCountStr == null) {
             redisService.set(key, "1");
-        } else {
-            int ipCount = Integer.valueOf(ipCountStr);
-            if (ipCount >= smsCodeIpCountLimit) {
-                log.info("短信请求拦截器，触发同一IP次数限制：{}, {}", ip, smsCodeIpCountLimit);
-                return false;
-            } else {
-                redisService.set(key, (ipCount + 1) + "");
-            }
+            return true;
         }
+        int ipCount = Integer.valueOf(ipCountStr);
+        if (ipCount >= smsCodeIpCountLimit) {
+            log.info("短信请求拦截器，触发同一IP次数限制：{}, {}", ip, smsCodeIpCountLimit);
+            return false;
+        }
+        redisService.set(key, (ipCount + 1) + "");
         return true;
     }
 

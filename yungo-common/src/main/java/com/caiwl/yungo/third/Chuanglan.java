@@ -11,7 +11,7 @@ import java.util.UUID;
 @Slf4j
 public class Chuanglan {
     private static final String URL = "http://smssh1.253.com/msg/send/json";
-    private static final boolean TEST = true;
+    private static boolean TEST = true;
 
     public static Body sendJson(String account, String password, String phone, String content) {
         if (TEST) {
@@ -22,24 +22,23 @@ public class Chuanglan {
                     .msg("")
                     .data("{\"code\":\"0\",\"msgId\":\"18122514344123403\",\"time\":\"20181225143441\",\"errorMsg\":\"\"}")
                     .build();
-        } else {
-            JSONObject json = new JSONObject();
-            json.put("account", account);
-            json.put("password", password);
-            json.put("msg", content);
-            json.put("phone", phone);
-            // 需要状态报告
-            json.put("report", true);
-            json.put("uid", UUID.randomUUID().toString());
-            String body = HttpClientUtil.post(URL, json.toString());
-            log.info("创蓝短信 phone={}, content={}, result={}", phone, content, body);
-            if (body != null) {
-                JSONObject respBody = JSON.parseObject(body);
-                int code = respBody.getIntValue("code");
-                String msg = respBody.getString("errorMsg");
-                return Body.builder().code(code).msg(msg).data(body).build();
-            }
-            return Body.fail("no response");
         }
+        JSONObject json = new JSONObject();
+        json.put("account", account);
+        json.put("password", password);
+        json.put("msg", content);
+        json.put("phone", phone);
+        // 需要状态报告
+        json.put("report", true);
+        json.put("uid", UUID.randomUUID().toString());
+        String body = HttpClientUtil.post(URL, json.toString());
+        log.info("创蓝短信 phone={}, content={}, result={}", phone, content, body);
+        if (body != null) {
+            JSONObject respBody = JSON.parseObject(body);
+            int code = respBody.getIntValue("code");
+            String msg = respBody.getString("errorMsg");
+            return Body.builder().code(code).msg(msg).data(body).build();
+        }
+        return Body.fail("no response");
     }
 }

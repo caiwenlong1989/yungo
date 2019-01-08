@@ -17,9 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+@Deprecated
 @SuppressWarnings("unchecked")
 public class MyJwtParser implements JwtParser {
-    
+
     JwtSignatureValidator validator;
     public MyJwtParser(byte[] keyBytes) {
         this.setSigningKey(keyBytes);
@@ -271,7 +272,7 @@ public class MyJwtParser implements JwtParser {
 
             if (!validator.isValid(jwtWithoutSignature, base64UrlEncodedDigest)) {
                 String msg = "JWT signature does not match locally computed signature. JWT validity cannot be " +
-                             "asserted and should not be trusted.";
+                        "asserted and should not be trusted.";
                 throw new SignatureException(msg);
             }
         }
@@ -301,8 +302,8 @@ public class MyJwtParser implements JwtParser {
                     long differenceMillis = maxTime - exp.getTime();
 
                     String msg = "JWT expired at " + expVal + ". Current time: " + nowVal + ", a difference of " +
-                        differenceMillis + " milliseconds.  Allowed clock skew: " +
-                        this.allowedClockSkewMillis + " milliseconds.";
+                            differenceMillis + " milliseconds.  Allowed clock skew: " +
+                            this.allowedClockSkewMillis + " milliseconds.";
                     throw new ExpiredJwtException(header, claims, msg);
                 }
             }
@@ -322,9 +323,9 @@ public class MyJwtParser implements JwtParser {
                     long differenceMillis = nbf.getTime() - minTime;
 
                     String msg = "JWT must not be accepted before " + nbfVal + ". Current time: " + nowVal +
-                        ", a difference of " +
-                        differenceMillis + " milliseconds.  Allowed clock skew: " +
-                        this.allowedClockSkewMillis + " milliseconds.";
+                            ", a difference of " +
+                            differenceMillis + " milliseconds.  Allowed clock skew: " +
+                            this.allowedClockSkewMillis + " milliseconds.";
                     throw new PrematureJwtException(header, claims, msg);
                 }
             }
@@ -348,17 +349,17 @@ public class MyJwtParser implements JwtParser {
             Object actualClaimValue = claims.get(expectedClaimName);
 
             if (
-                Claims.ISSUED_AT.equals(expectedClaimName) ||
-                Claims.EXPIRATION.equals(expectedClaimName) ||
-                Claims.NOT_BEFORE.equals(expectedClaimName)
-            ) {
+                    Claims.ISSUED_AT.equals(expectedClaimName) ||
+                            Claims.EXPIRATION.equals(expectedClaimName) ||
+                            Claims.NOT_BEFORE.equals(expectedClaimName)
+                    ) {
                 expectedClaimValue = expectedClaims.get(expectedClaimName, Date.class);
                 actualClaimValue = claims.get(expectedClaimName, Date.class);
             } else if (
-                expectedClaimValue instanceof Date &&
-                actualClaimValue != null &&
-                actualClaimValue instanceof Long
-            ) {
+                    expectedClaimValue instanceof Date &&
+                            actualClaimValue != null &&
+                            actualClaimValue instanceof Long
+                    ) {
                 actualClaimValue = new Date((Long)actualClaimValue);
             }
 
@@ -366,14 +367,14 @@ public class MyJwtParser implements JwtParser {
 
             if (actualClaimValue == null) {
                 String msg = String.format(
-                    ClaimJwtException.MISSING_EXPECTED_CLAIM_MESSAGE_TEMPLATE,
-                    expectedClaimName, expectedClaimValue
+                        ClaimJwtException.MISSING_EXPECTED_CLAIM_MESSAGE_TEMPLATE,
+                        expectedClaimName, expectedClaimValue
                 );
                 invalidClaimException = new MissingClaimException(header, claims, msg);
             } else if (!expectedClaimValue.equals(actualClaimValue)) {
                 String msg = String.format(
-                    ClaimJwtException.INCORRECT_EXPECTED_CLAIM_MESSAGE_TEMPLATE,
-                    expectedClaimName, expectedClaimValue, actualClaimValue
+                        ClaimJwtException.INCORRECT_EXPECTED_CLAIM_MESSAGE_TEMPLATE,
+                        expectedClaimName, expectedClaimValue, actualClaimValue
                 );
                 invalidClaimException = new IncorrectClaimException(header, claims, msg);
             }
@@ -395,7 +396,7 @@ public class MyJwtParser implements JwtParser {
 
     @Override
     public <T> T parse(String compact, JwtHandler<T> handler)
-        throws ExpiredJwtException, MalformedJwtException, SignatureException {
+            throws ExpiredJwtException, MalformedJwtException, SignatureException {
         Assert.notNull(handler, "JwtHandler argument cannot be null.");
         Assert.hasText(compact, "JWT String argument cannot be null or empty.");
 
@@ -476,3 +477,4 @@ public class MyJwtParser implements JwtParser {
         }
     }
 }
+

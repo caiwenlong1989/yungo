@@ -1,11 +1,9 @@
 package com.caiwl.yungo.util;
 
-import org.springframework.util.StringUtils;
-
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public class StringUtil extends StringUtils {
+public class StringUtil {
     private static final Random random = new Random();
     private static final Pattern PATTERN_MOBILE = Pattern.compile("^1[3456789]\\d{9}$");
 
