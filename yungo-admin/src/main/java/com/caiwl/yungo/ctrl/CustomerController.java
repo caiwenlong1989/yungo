@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 客户管理
+ * @author caiwl
+ * @date 2019/1/13 11:54
+ */
 @RestController
 @RequestMapping("/admin/v1/customer")
 public class CustomerController {
