@@ -17,11 +17,6 @@ public class HashIdUtil {
         }
         return Long.valueOf(nums[0]);
     }
-    
-    public static void main(String[] args) {
-        System.out.println(encode(1));
-        System.out.println(decode("P43A5KVMAV7WYEDL"));
-    }
 
     public static String encodeHex(String hexa){
         return HASHIDS.encodeHex(hexa);
@@ -32,5 +27,12 @@ public class HashIdUtil {
             return null;
         }
         return HASHIDS.decodeHex(hash).toUpperCase();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(encode(1));
+        System.out.println(decode("P43A5KVMAV7WYEDL"));
+        System.out.println(encodeHex("1A20190122181000"));
+        System.out.println(decodeHex("5J4Q8RWE5XDW0JXBL").split("A")[1]);
     }
 }
