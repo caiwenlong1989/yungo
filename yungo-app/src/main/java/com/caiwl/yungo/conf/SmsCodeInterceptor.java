@@ -1,10 +1,12 @@
 package com.caiwl.yungo.conf;
 
 import com.caiwl.yungo.util.DateUtil;
+import com.caiwl.yungo.util.RedisUtil;
 import com.caiwl.yungo.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,15 +20,15 @@ public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
     @Value("${my.sms-code.ip-count-limit}")
     private int smsCodeIpCountLimit;
     @Autowired
-    private RedisService redisService;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = getIpAddress(request);
-        String key = RedisService.KEY_PREFIX_SMS_CODE_IP_COUNT + DateUtil.today() + "_" + ip;
-        String ipCountStr = redisService.get(key);
+        String key = RedisUtil.KEY_PREFIX_SMS_CODE_IP_COUNT + DateUtil.today() + "_" + ip;
+        String ipCountStr = RedisUtil.get(stringRedisTemplate, key);
         if (ipCountStr == null) {
-            redisService.set(key, "1");
+            RedisUtil.set(stringRedisTemplate, key, "1");
             return true;
         }
         int ipCount = Integer.valueOf(ipCountStr);
@@ -34,7 +36,7 @@ public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
             log.info("短信请求拦截器，触发同一IP次数限制：{}, {}", ip, smsCodeIpCountLimit);
             return false;
         }
-        redisService.set(key, (ipCount + 1) + "");
+        RedisUtil.set(stringRedisTemplate, key, (ipCount + 1) + "");
         return true;
     }
 

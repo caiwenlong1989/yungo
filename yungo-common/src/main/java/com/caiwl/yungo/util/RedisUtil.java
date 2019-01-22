@@ -1,13 +1,10 @@
-package com.caiwl.yungo.conf;
+package com.caiwl.yungo.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
-public class RedisService {
+public class RedisUtil {
     public static final String KEY_PREFIX_SMS_CODE_IP_COUNT = "yungo_sms_code_ip_count_";
 
     /**
@@ -15,10 +12,7 @@ public class RedisService {
      */
     private static final long DEFAULT_TIMEOUT = 2 * 60 * 60;
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
-    public void set(String key, String value) {
+    public static void set(StringRedisTemplate stringRedisTemplate, String key, String value) {
         stringRedisTemplate.opsForValue().set(key, value, DEFAULT_TIMEOUT, TimeUnit.SECONDS);
     }
 
@@ -27,42 +21,42 @@ public class RedisService {
      * @param value
      * @param timeout 有效时间（单位：秒）
      */
-    public void set(String key, String value, long timeout) {
+    public static void set(StringRedisTemplate stringRedisTemplate, String key, String value, long timeout) {
         if (key == null || value == null) {
             return;
         }
         stringRedisTemplate.opsForValue().set(key, value, timeout, TimeUnit.SECONDS);
     }
 
-    public String get(String key) {
-        if (hasKey(key)) {
+    public static String get(StringRedisTemplate stringRedisTemplate, String key) {
+        if (hasKey(stringRedisTemplate, key)) {
             return stringRedisTemplate.opsForValue().get(key);
         }
         return null;
     }
 
-    public void delete(String key) {
-        if (hasKey(key)) {
+    public static void delete(StringRedisTemplate stringRedisTemplate, String key) {
+        if (hasKey(stringRedisTemplate, key)) {
             stringRedisTemplate.delete(key);
         }
     }
 
-    public boolean hasKey(String key) {
+    public static boolean hasKey(StringRedisTemplate stringRedisTemplate, String key) {
         if (key == null) {
             return false;
         }
         return stringRedisTemplate.hasKey(key);
     }
 
-    public boolean expired(String key) {
-        if (hasKey(key)) {
+    public static boolean expired(StringRedisTemplate stringRedisTemplate, String key) {
+        if (hasKey(stringRedisTemplate, key)) {
             return stringRedisTemplate.boundValueOps(key).getExpire() <= 0;
         }
         return true;
     }
 
-    public long getExpire(String key) {
-        if (hasKey(key)) {
+    public static long getExpire(StringRedisTemplate stringRedisTemplate, String key) {
+        if (hasKey(stringRedisTemplate, key)) {
             return stringRedisTemplate.boundValueOps(key).getExpire();
         }
         return 0;
