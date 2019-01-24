@@ -1,24 +1,27 @@
 package com.caiwl.yungo.entity;
 
-import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "t_log_sms")
-@Builder
-public class SmsLog {
+/**
+ * @author caiwl
+ * @date 2019/1/24 14:04
+ */
+@Table(name = "t_apply")
+@Data
+public class Apply {
     @Id
     @GeneratedValue(generator = "JDBC")
     private Long id;
     private Date createTime;
     private Date updateTime;
-    private Integer type;
     private String phone;
-    private String content;
-    private String response;
-    private Integer respCode;
-    private String respMsg;
+    private int applyStatus;
+    private boolean idCardStatus;
+    private boolean mxCarrierStatus;
+    private boolean infoStatus;
 }

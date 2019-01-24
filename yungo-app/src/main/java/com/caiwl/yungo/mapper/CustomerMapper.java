@@ -22,4 +22,7 @@ public interface CustomerMapper extends Mapper<Customer> {
 
     @Select("select * from t_customer where id = #{id}")
     Customer get(@Param("id") long id);
+
+    @Select("select * from t_customer where phone = #{phone}")
+    Customer getByPhone(@Param("phone") String phone);
 }

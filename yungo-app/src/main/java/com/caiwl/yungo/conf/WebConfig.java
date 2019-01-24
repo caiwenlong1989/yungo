@@ -26,7 +26,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/app/v1/pub/smsCode/*");
         registry.addInterceptor(getCustomerIdInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/app/v1/pub/smsCode/*");
+                .excludePathPatterns(
+                        "/app/v1/pub/smsCode/*",
+                        "/app/v1/pub/registry",
+                        "/app/v1/pub/login");
     }
 
     @Override

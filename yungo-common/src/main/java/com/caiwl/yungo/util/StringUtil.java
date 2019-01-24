@@ -10,6 +10,9 @@ public class StringUtil {
     public static boolean isEmpty(String str) {
         return (str == null || str.isEmpty());
     }
+    public static boolean notEmpty(String str) {
+        return !isEmpty(str);
+    }
 
     public static String randomNum(int len) {
         return String.valueOf(random.nextDouble()).substring(2, 2 + len);
@@ -21,6 +24,10 @@ public class StringUtil {
 
     public static boolean ipIsNull(String ip) {
         return isEmpty(ip) || "unknown".equalsIgnoreCase(ip);
+    }
+
+    public static boolean notEquals(String a, String b) {
+        return !(a == null ? b == null : a.equals(b));
     }
 
     public static void main(String[] args) {

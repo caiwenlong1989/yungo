@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 发送短信请求接口拦截器，拦截同一手机号码、同一IP次数限制
+ * 发送短信请求接口拦截器，拦截同一手机号码、同一IP次数限制、同一设备限制
  */
 @Slf4j
 public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
@@ -25,10 +25,10 @@ public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = getIpAddress(request);
-        String key = RedisUtil.KEY_PREFIX_SMS_CODE_IP_COUNT + DateUtil.today() + "_" + ip;
-        String ipCountStr = RedisUtil.get(stringRedisTemplate, key);
+        String redisKey = RedisUtil.KEY_PREFIX_SMS_CODE_IP_COUNT + DateUtil.today() + "_" + ip;
+        String ipCountStr = RedisUtil.get(stringRedisTemplate, redisKey);
         if (ipCountStr == null) {
-            RedisUtil.set(stringRedisTemplate, key, "1");
+            RedisUtil.set(stringRedisTemplate, redisKey, "1");
             return true;
         }
         int ipCount = Integer.valueOf(ipCountStr);
@@ -36,7 +36,7 @@ public class SmsCodeInterceptor extends HandlerInterceptorAdapter {
             log.info("短信请求拦截器，触发同一IP次数限制：{}, {}", ip, smsCodeIpCountLimit);
             return false;
         }
-        RedisUtil.set(stringRedisTemplate, key, (ipCount + 1) + "");
+        RedisUtil.set(stringRedisTemplate, redisKey, (ipCount + 1) + "");
         return true;
     }
 

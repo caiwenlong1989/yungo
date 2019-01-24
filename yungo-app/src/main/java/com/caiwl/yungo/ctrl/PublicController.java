@@ -6,10 +6,7 @@ import com.caiwl.yungo.service.CustomerService;
 import com.caiwl.yungo.service.SmsLogService;
 import com.caiwl.yungo.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app/v1/pub")
@@ -24,12 +21,22 @@ public class PublicController {
         if (customerService.exists(phone)) {
             return Body.fail("该手机号码已注册，可以直接登录哦");
         }
-        String content = String.format("您的验证码是：%s", StringUtil.randomNum(6));
-        Body body = smsLogService.sendSmsCode(SmsLogEnum.Type.REGISTRY, phone, content);
-        if (body.getCode() == SmsLogEnum.RespCode.SUBMIT_SUCCESS.getCode()) {
-            return Body.success();
-        }
-        return Body.fail("短信发送失败，请联系客服处理");
+        return smsLogService.sendSmsCode(SmsLogEnum.Type.REGISTRY, phone, StringUtil.randomNum(6));
+    }
+
+    @GetMapping("/smsCode/login")
+    public Body loginSmsCode(@RequestParam String phone) {
+        return smsLogService.sendSmsCode(SmsLogEnum.Type.LOGIN, phone, StringUtil.randomNum(6));
+    }
+
+    @PostMapping("/registry")
+    public Body registry(@RequestParam String phone, @RequestParam String smsCode) {
+        return customerService.registry(phone, smsCode);
+    }
+
+    @PostMapping("/login")
+    public Body login(@RequestParam String phone, @RequestParam String smsCode) {
+        return customerService.login(phone, smsCode);
     }
 
 }

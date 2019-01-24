@@ -6,6 +6,9 @@ public class HashIdUtil {
     private static final Hashids HASHIDS = new Hashids("yungo", 16, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
     
     public static String encode(long id) {
+        if (id == 0) {
+            return "";
+        }
         return HASHIDS.encode(id);
     }
     

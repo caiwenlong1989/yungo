@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RedisUtil {
     public static final String KEY_PREFIX_SMS_CODE_IP_COUNT = "yungo_sms_code_ip_count_";
+    public static final String KEY_PREFIX_SMS_CODE_VALUE = "yungo_sms_code_value_";
 
     /**
      * 默认有效时间2小时
@@ -29,19 +30,19 @@ public class RedisUtil {
     }
 
     public static String get(StringRedisTemplate stringRedisTemplate, String key) {
-        if (hasKey(stringRedisTemplate, key)) {
+        if (has(stringRedisTemplate, key)) {
             return stringRedisTemplate.opsForValue().get(key);
         }
         return null;
     }
 
-    public static void delete(StringRedisTemplate stringRedisTemplate, String key) {
-        if (hasKey(stringRedisTemplate, key)) {
+    public static void del(StringRedisTemplate stringRedisTemplate, String key) {
+        if (has(stringRedisTemplate, key)) {
             stringRedisTemplate.delete(key);
         }
     }
 
-    public static boolean hasKey(StringRedisTemplate stringRedisTemplate, String key) {
+    public static boolean has(StringRedisTemplate stringRedisTemplate, String key) {
         if (key == null) {
             return false;
         }
@@ -49,14 +50,14 @@ public class RedisUtil {
     }
 
     public static boolean expired(StringRedisTemplate stringRedisTemplate, String key) {
-        if (hasKey(stringRedisTemplate, key)) {
+        if (has(stringRedisTemplate, key)) {
             return stringRedisTemplate.boundValueOps(key).getExpire() <= 0;
         }
         return true;
     }
 
     public static long getExpire(StringRedisTemplate stringRedisTemplate, String key) {
-        if (hasKey(stringRedisTemplate, key)) {
+        if (has(stringRedisTemplate, key)) {
             return stringRedisTemplate.boundValueOps(key).getExpire();
         }
         return 0;
