@@ -19,9 +19,13 @@ public class Apply {
     private Long id;
     private Date createTime;
     private Date updateTime;
+    /** 唯一索引 */
+    private Long customerId;
     private String phone;
     private int applyStatus;
     private boolean idCardStatus;
     private boolean mxCarrierStatus;
     private boolean infoStatus;
+    private String mxTaskId;
+    private Date finishAuthTime;
 }

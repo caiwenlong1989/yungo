@@ -15,5 +15,6 @@ public class Customer {
     private Long id;
     private Date createTime;
     private Date updateTime;
+    /** 唯一索引 */
     private String phone;
 }

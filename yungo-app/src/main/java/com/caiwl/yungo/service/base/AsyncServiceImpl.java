@@ -16,13 +16,13 @@ public class AsyncServiceImpl implements AsyncService {
     @Async
     @Override
     public void saveSmsLog(SmsLogEnum.Type type, String phone, String content, Body body) {
-        smsLogMapper.insertSelective(SmsLog.builder()
-                .type(type.getType())
-                .phone(phone)
-                .content(content)
-                .response((String) body.getData())
-                .respCode(body.getCode())
-                .respMsg(body.getMsg())
-                .build());
+        SmsLog smsLog = new SmsLog();
+        smsLog.setType(type.getType());
+        smsLog.setPhone(phone);
+        smsLog.setContent(content);
+        smsLog.setResponse((String) body.getData());
+        smsLog.setRespCode(body.getCode());
+        smsLog.setRespMsg(body.getMsg());
+        smsLogMapper.insertSelective(smsLog);
     }
 }

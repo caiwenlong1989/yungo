@@ -7,18 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "t_log_sms")
+/**
+ * @author caiwl
+ * @date 2019/1/24 14:04
+ */
+@Table(name = "t_apply_auth")
 @Data
-public class SmsLog {
+public class ApplyAuth {
     @Id
     @GeneratedValue(generator = "JDBC")
     private Long id;
     private Date createTime;
     private Date updateTime;
-    private Integer type;
-    private String phone;
-    private String content;
-    private String response;
-    private Integer respCode;
-    private String respMsg;
+    /** 复合索引 */
+    private Long applyId;
+    private int dataType;
+    private String ossKey;
 }

@@ -11,5 +11,11 @@
 
     <artifactId>yungo-timer</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.caiwl</groupId>
+            <artifactId>yungo-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

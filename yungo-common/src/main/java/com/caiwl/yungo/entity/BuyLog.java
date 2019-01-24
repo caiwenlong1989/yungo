@@ -1,6 +1,6 @@
 package com.caiwl.yungo.entity;
 
-import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "t_log_buy")
-@Builder
+@Data
 public class BuyLog {
     @Id
     @GeneratedValue(generator = "JDBC")

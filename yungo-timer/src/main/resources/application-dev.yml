@@ -19,3 +19,5 @@ my:
     password:
   sms-code:
     ip-count-limit: 20
+  auto-audit:
+    url:
