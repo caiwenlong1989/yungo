@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLException;
+
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -14,6 +16,14 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Body reqParamError() {
         return Body.fail("请求参数错误");
+    }
+
+    @ExceptionHandler(SQLException.class)
+    @ResponseBody
+    public Body sqlError(Exception e) {
+        log.error("SQLException occurred：", e);
+        // 数据库错误，需要及时处理，如短信或邮件提醒等
+        return Body.fail("服务器忙，请稍后重试");
     }
 
     @ExceptionHandler(Exception.class)
