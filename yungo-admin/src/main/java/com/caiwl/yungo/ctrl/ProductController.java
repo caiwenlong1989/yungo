@@ -49,12 +49,11 @@ public class ProductController {
 
     /**
      * 修改单个
-     * @param id
      * @param product
      * @return
      */
-    @PutMapping("/{id}")
-    public Body put(@PathVariable Long id, @ModelAttribute Product product) {
+    @PutMapping("/")
+    public Body put(Product product) {
         return Body.success();
     }
 
