@@ -20,7 +20,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/page")
+    @GetMapping("/")
     public Body page(String phone,
             @RequestParam(defaultValue = Constants.PAGE_NUM) int pageNum,
             @RequestParam(defaultValue = Constants.PAGE_SIZE) int pageSize) {
